@@ -38,6 +38,10 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
     protected function casts(): array
     {
         return [

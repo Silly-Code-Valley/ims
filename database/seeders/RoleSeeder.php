@@ -19,13 +19,14 @@ class RoleSeeder extends Seeder
             'name' => 'Student',
         ]);
         Role::factory()->create([
+            'name' => 'Partner',
+        ]);
+        Role::factory()->create([
             'name' => 'Director',
         ]);
         Role::factory()->create([
             'name' => 'Coordinator',
         ]);
-        Role::factory()->create([
-            'name' => 'Partner',
-        ]);
+
     }
 }
