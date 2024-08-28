@@ -10,6 +10,8 @@ Route::get('/', function () {
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/dashboard', function () {
+
+    // Return view based on user role
     
     if (Auth::user()->role === 'Student') {
         return view('student.dashboard');
@@ -33,21 +35,21 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware('student')->name('student.')->group(function () {
+Route::middleware('checkrole:Student')->name('student.')->group(function () {
     // sample route
-    Route::get('/student/dashboard', function () {
-        return redirect()->route('dashboard');
-    })->name('dashboard');
+    Route::get('/studentonly', function () {
+        return view('student.studentonly');
+    })->name('studentonly');
 });
 
-Route::middleware('partner')->name('partner.')->group(function () {
-
-});
-
-Route::middleware('director')->name('director.')->group(function () {
+Route::middleware('checkrole:Partner')->name('partner.')->group(function () {
 
 });
 
-Route::middleware('coordinator')->name('coordinator.')->group(function () {
+Route::middleware('checkrole:Director')->name('director.')->group(function () {
+
+});
+
+Route::middleware('checkrole:Coordinator')->name('coordinator.')->group(function () {
 
 });
